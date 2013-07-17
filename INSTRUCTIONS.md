@@ -59,6 +59,26 @@ Dragging the mouse whilst the action is paused gives a cool 'bullet time' effect
 5 "task map"
 6 "eagle eyes" (as if you were inside your glider -- but no banking)
 7 "stay there" (freeze camera view)
+
+Switches between camera modes...
+1. Follow user
+2. Follow gaggle
+3. Plan
+4. The current node (from far away)
+5. The entire task
+6. Pilot's view
+7. Stay there
+
+in setMode():
+1: flight.client.XCCameraMan.USER
+2: flight.client.XCCameraMan.GAGGLE
+3: flight.client.XCCameraMan.PLAN
+4: flight.client.XCCameraMan.NODE
+5: flight.client.XCCameraMan.TASK
+6: flight.client.XCCameraMan.PILOT
+7: flight.client.XCCameraMan.STAY_THERE
+-: flight.client.XCCameraMan.pullOut() Move eye further away from the focus. 
++: flight.client.XCCameraMan.pullIn() Move eye closer to the focus. 
 -->
 Controls
 --------
@@ -68,9 +88,9 @@ Controls
  - `z`       : Turn left
  - `x`       : Turn right
  - `Spacebar`: Circle (in thermal)
- - `p`       : Pause/Resume
+ - `p`       : Pause/Resume *(only works in offline mode)*
  - `a`       : Normal/Fast glide
- - `q`       : Fast simulation on/off
+ - `q`       : Fast simulation on/off *(only works in offline mode)*
  
  *Left and Right arrow keys have replaced `z` & `x` in v3.02x*
- *Spacebar and `p` works in v3.02x; `a`, `q` may not*
+ *Spacebar and `p` works in v3.02x; `a` may not*
