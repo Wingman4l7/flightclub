@@ -35,6 +35,10 @@
  
   - normalized indentation
 
+### XCCameraMan ###
+
+  - normalized indentation
+
   
 ## /framework3d ##
 
