@@ -519,8 +519,7 @@ class TaskCanvas extends Canvas {
     }
 
     /**
-       Gets the param canvas values and copies them to the current
-       trigger.
+       Gets the param canvas values and copies them to the current trigger.
     */
     void getSliders() {
 		System.out.println("Get sliders...");
