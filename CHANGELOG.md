@@ -1,5 +1,7 @@
  <h1 align="center">Flight Club</h1>
  
+<p align="center"><b>Change Log</b></p>
+ 
 ## /startup ##
  
 ### XCFrame ###

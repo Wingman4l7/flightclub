@@ -41,9 +41,9 @@ To see the fixes & new features I've applied to the original source code, view t
 
 These are the main fixes:
 
- - got the vario tones working again *(this isn't committed yet!)*
+ - got the vario sounds working
  - enabled the balloon glider type *(but not in the command-line arguments)*
- - mucked with the directory paths so a stand-alone executable JAR would work
+ - mucked with the directory paths so a stand-alone executable JAR would work *(not committed yet!)*
 
 ## Compiling / Running / Playing ##
 
