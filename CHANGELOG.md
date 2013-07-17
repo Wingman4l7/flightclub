@@ -4,24 +4,37 @@
  
  === XCFrame ===
   
-  - normalized indenting
-  - added comments on main()
-  - enabled use of balloon glider type via the command-line argument
-  - set AI defaults to have 1 less hang glider, and to include 1 balloon
+  - normalized indentation
+  - added comments in main()
+  - enabled use of balloon glider type via the command-line argument *(not working!)*
+  - set AI defaults to have 1 less hang glider, and to include 1 balloon *(not working!)*
+  
+  === ModelFrame ===
+  
+  - 
+  - normalized indentation 
   
   
  == `/client` ==
  
+ === Variometer ===
+  - changed file reference from .au to .wav to be compatible with new  play() code
+  - normalized indentation
+ 
  === XCModelViewer ===
  
-  - normalized indenting
+  - normalized indentation
+  
+ === Task ===
+ 
+   - normalized indentation
 
   
 == `/framework3d` ==
 
 === ModelViewer ===
 
- - normalized indenting
+ - normalized indentation
   
   
   
@@ -29,5 +42,5 @@
 
 === TaskDesigner ===
 
- - normalized indenting
+ - normalized indentation
  - TODO: add missing bits or, in the meantime, add error handling to gracefully fail when someone tries to use them
