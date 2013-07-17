@@ -56,7 +56,7 @@ public class Variometer {
     private void beep() {
 		float lift = glider.getSink() + glider.air[2];
 		if (lift > 0) {
-			xcModelViewer.modelEnv.play("beep" + whichStep(lift) + ".au");
+			xcModelViewer.modelEnv.play("beep" + whichStep(lift) + ".wav");
 		}
     }
 

@@ -13,6 +13,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.net.*;
 import java.io.*;
+import javax.sound.sampled.*;
 
 /**
    This class displays a ModelViewer in a frame. Thus we may run a
@@ -77,7 +78,16 @@ public class ModelFrame extends Frame implements ModelEnv {
     }
 	
     public void play(String s) {
-		//can not play sound from a frame
+		InputStream path = getClass().getResourceAsStream("/" + s);
+		try {
+			Clip clip = AudioSystem.getClip();
+			clip.open(AudioSystem.getAudioInputStream(path));
+			clip.start();
+		}
+		catch (Exception e) {
+			String msg = "Error playing sound: " + s + "\n";
+			System.out.println(msg + e.toString());
+		}
     }
 
     /**
