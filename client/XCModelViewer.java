@@ -13,9 +13,10 @@ import flightclub.framework3d.*;
 import java.awt.*;
 import java.applet.*;
 import java.io.*;
+
 /**
-   This class simply overrides a few factory methods to create the
-   model viewer for the xc model.
+   This class simply overrides a few factory methods 
+   to create the model viewer for the xc model.
 */
 public class XCModelViewer extends ModelViewer {
     XCModel xcModel;
@@ -25,24 +26,24 @@ public class XCModelViewer extends ModelViewer {
 
     /** Connects to game server. */
     void connectToServer() {
-	try {
-	    xcNet = new XCNet(this); 
-	    xcNet.start();
-	} catch(IOException e){
-	    System.out.println("Error connecting to game server: "+ e);
-	    // degrade to single player mode
-	    // todo: display server offline msg
-	}
+		try {
+			xcNet = new XCNet(this); 
+			xcNet.start();
+		} catch(IOException e){
+			System.out.println("Error connecting to game server: "+ e);
+			// degrade to single player mode
+			// TODO: display server offline msg
+		}
     }
 
     //  Type chaining - ha !
     protected void createModel() {
-	model = xcModel = new XCModel(this);
+		model = xcModel = new XCModel(this);
     }
 
     protected void createCameraMan() {
-	cameraMan = new XCCameraMan(this);
-	cameraMan.init();
+		cameraMan = new XCCameraMan(this);
+		cameraMan.init();
     }
 
     /**
@@ -53,49 +54,46 @@ public class XCModelViewer extends ModelViewer {
        xcNet must be after gliders.
      */
     public void start() {
-	if (clock != null) {
-	    setNetFlag();
-	    xcModel.loadTask(this.modelEnv.getTask(), this.modelEnv.getPilotType(), this.modelEnv.getTypeNums());
-	    if (netFlag) {
-		connectToServer(); 
-	    }
+		if (clock != null) {
+			setNetFlag();
+			xcModel.loadTask(this.modelEnv.getTask(), this.modelEnv.getPilotType(), this.modelEnv.getTypeNums());
 
-	    if (netFlag && xcNet == null) { // unable to connect !
-		xcModel.gliderManager.createAIs(3, 3, 3);
-	    }
+			if (netFlag) {
+				connectToServer(); 
+			}
+			if (netFlag && xcNet == null) { // unable to connect !
+				xcModel.gliderManager.createAIs(3, 3, 3);
+			}
 
-	    clock.start();
-	    xcModel.startPlay();
-	} else {
-	    pendingStart = true;
-	}
+			clock.start();
+			xcModel.startPlay();
+		} else {
+			pendingStart = true;
+		}
     }
 
-    /**
-       Flag - connect to game server only if a host and port have been
-       specified.
-    */
+    /** Flag - connect to game server only if a host and port have been specified.  */
     private void setNetFlag() {
-	netFlag = (modelEnv.getHostPort() != null);
+		netFlag = (modelEnv.getHostPort() != null);
     }
 
     /**
-       No controls (zoom button etc.) at bottom of the screen. They
-       were just for use with the test harnesses.
+       No controls (zoom button etc.) at bottom of the screen. 
+	   They were just for use with the test harnesses.
     */
     protected void createControls() {
     }
 
     protected void createModelCanvas() {
-	setLayout(new BorderLayout());
-	add("Center", modelCanvas = new XCModelCanvas(this));
-	validate();
+		setLayout(new BorderLayout());
+		add("Center", modelCanvas = new XCModelCanvas(this));
+		validate();
     }
 
     public void stop() {
-	super.stop();
-	if (xcNet != null) {
-	    xcNet.destroyMe(); // close socket
-	}
+		super.stop();
+		if (xcNet != null) {
+			xcNet.destroyMe(); // close socket
+		}
     }
 }

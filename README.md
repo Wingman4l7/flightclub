@@ -26,6 +26,7 @@ The newer version is the version that is under active development here.  I will 
 
 ### Features ###
 
+ - 3 different types of glider: hangglider, paraglider,and sailplane -- and a hot air balloon!
  - Network play!
  - Task building tool!
  - *Other things!*
@@ -38,7 +39,7 @@ The newer version is the version that is under active development here.  I will 
 
 To see the fixes & new features I've applied to the original source code, view the [changelog](https://github.com/Wingman4l7/flightclub/blob/master/CHANGELOG.md).
 
-Here are the main fixes:
+These are the main fixes:
 
  - got the vario tones working again *(this isn't committed yet!)*
  - enabled the balloon glider type *(but not in the command-line arguments)*
@@ -66,10 +67,8 @@ The `XCFrame` class in `/startup/` implements Flight Club as an application.  It
 All the parameteres are optional. If none are passed in the game loads defaults as follows: 
  - `task` = default
  - `pilot_type` = 1 (hg)
- - `host:port` = null (ie. single player mode)
- - pgs = 2, hgs = 4, sps = 2. 
- 
- <!--- last line: does he mean the count?  I think so... -->
+ - `host:port` = null *(ie. single player mode)*
+ - pgs = 2, hgs = 4, sps = 2 *(the numbers of each type of AI glider)*
 
 The last two parameters are mutually exclusive. Either we connect to a game server or we create a number of AI gliders.
 
@@ -78,19 +77,17 @@ Alternatively, you can just double-click on the stand-alone executable to run it
    
 ### How To Play ###
 
-For game controls, objectives, and tips, view the [instructions] [IS]. 
- 
-[IS]: https://github.com/Wingman4l7/flightclub/blob/master/INSTRUCTIONS.md
+For game controls, objectives, and tips, view the [instructions](https://github.com/Wingman4l7/flightclub/blob/master/INSTRUCTIONS.md).
 
-License
--------
+## License ##
+
 Dan Burton [licensed this source code] [license_ref] under version 2 of the [GNU General Public License] [GNU_GPL].  Although I might personally choose to release source code under a diferent license (like [Creative Commons](http://creativecommons.org/licenses/)), let's say that all this is under the GPL too, for simplicity's sake.
 
 [license_ref]: http://web.archive.org/web/20050620075430/http://www.danb.dircon.co.uk/hg/hg.htm#dev
 [GNU_GPL]: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
-Donations
----------
+## Donations ##
+
 If you appreciate my continued support & development of this game, you can send Bitcoin donations to: `1F7kfMNUNQy8e52RHnQAWYXeaYfzFqHJAZ`
 
 Alternatively, you can use [Gittip](https://www.gittip.com/Wingman4l7/).
