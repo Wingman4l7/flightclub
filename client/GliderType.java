@@ -71,6 +71,7 @@ public class GliderType {
 		@see flightclub.data.Paraglider
 		@see flightclub.data.Hangglider
 		@see flightclub.data.Sailplane 
+		@see flightclub.data.Balloon		
     */
     public GliderType(String typeName) {
 		this.typeName = typeName;

@@ -28,9 +28,9 @@ public class GliderManager implements ClockObserver {
     int numNet = 0; // how many connected
 
     static final int MAX_USERS = 15; // Max number of Connected Users
-    static final int NUM_TYPES = 3; // how many glider types
-    static final String[] typeNames = new String[] {"paraglider", "hang-glider", "sailplane"};
-
+    static final int NUM_TYPES = 4; // how many glider types
+    static final String[] typeNames = new String[] {"paraglider", "hang-glider", "sailplane", "balloon"};
+	
     public GliderManager(XCModelViewer xcModelViewer, int pilotType) {
 		this.xcModelViewer = xcModelViewer;
 		xcModelViewer.clock.addObserver(this);
@@ -41,15 +41,17 @@ public class GliderManager implements ClockObserver {
 		}
     }
 
-    static GliderType[] types = new GliderType[3]; // array of glider types (pg, hg, sp)
+    static GliderType[] types = new GliderType[3]; // array of glider types (pg, hg, sp, bl)
 
-    /** Loads the glider types (reads polar data etc from a text
-     * file). */
+    /** 
+		Loads the glider types (reads polar data etc from a text file). 
+	*/
     private void initTypes() {
 		try {
 			types[0] = new GliderType(xcModelViewer, "paraglider", 0);
 			types[1] = new GliderType(xcModelViewer, "hangglider", 1);
 			types[2] = new GliderType(xcModelViewer, "sailplane", 2);
+			types[3] = new GliderType(xcModelViewer, "balloon", 3);
 		} catch (IOException e) {
 			System.out.println(e);
 			System.exit(1);

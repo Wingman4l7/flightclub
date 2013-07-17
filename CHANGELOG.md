@@ -42,7 +42,12 @@
 ### GliderManager ###
 
  - normalized indentation
+ - enabled Balloon glider-type 
 
+### GliderType ###
+
+ - normalized indentation 
+ 
   
 ## /framework3d ##
 
