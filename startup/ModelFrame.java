@@ -30,73 +30,73 @@ public class ModelFrame extends Frame implements ModelEnv {
     int[] typeNums; //ditto
 
     public ModelFrame(String modelViewerClassName, String title, int width, int height, 
-		      String task, int pilotType, String hostPort, int[] typeNums) {
-	super(title);
+					  String task, int pilotType, String hostPort, int[] typeNums) {
+		super(title);
 
-	try {
-	    Class c = Class.forName(modelViewerClassName);
-	    this.modelViewerThin = (ModelViewerThin) c.newInstance();
-	} catch (Exception e) {
-	    System.out.println(e);
-	    System.exit(1);
-	}
-
-	this.task = task;
-	this.pilotType = pilotType;
-	this.hostPort = hostPort;
-	this.typeNums = typeNums;
-
-	setSize(width, height);
-	setLayout(new BorderLayout());
-	add("Center", (Panel) modelViewerThin);
-	validate();
-	show();
-
-	modelViewerThin.init((ModelEnv) this);
-	modelViewerThin.start();
-
-	this.addWindowListener(new WindowAdapter(){
-		public void windowClosing(WindowEvent e){
-		    modelViewerThin.stop();
-		    System.exit(0);
+		try {
+			Class c = Class.forName(modelViewerClassName);
+			this.modelViewerThin = (ModelViewerThin) c.newInstance();
+		} catch (Exception e) {
+			System.out.println(e);
+			System.exit(1);
 		}
-	    });
 
-	this.addKeyListener(new KeyAdapter() {
-		public void keyPressed(KeyEvent e){
-		    ModelFrame.this.modelViewerThin.handleEvent(e);
-		}
-		public void keyReleased(KeyEvent e){
-		    ModelFrame.this.modelViewerThin.handleEvent(e);
-		}
-	    });
+		this.task = task;
+		this.pilotType = pilotType;
+		this.hostPort = hostPort;
+		this.typeNums = typeNums;
+
+		setSize(width, height);
+		setLayout(new BorderLayout());
+		add("Center", (Panel) modelViewerThin);
+		validate();
+		show(); // this call has been deprecated!
+
+		modelViewerThin.init((ModelEnv) this);
+		modelViewerThin.start();
+
+		this.addWindowListener(new WindowAdapter(){
+			public void windowClosing(WindowEvent e){
+				modelViewerThin.stop();
+				System.exit(0);
+			}
+			});
+
+		this.addKeyListener(new KeyAdapter() {
+			public void keyPressed(KeyEvent e){
+				ModelFrame.this.modelViewerThin.handleEvent(e);
+			}
+			public void keyReleased(KeyEvent e){
+				ModelFrame.this.modelViewerThin.handleEvent(e);
+			}
+			});
     }
 	
     public Image getImage(String s) {
-	return Toolkit.getDefaultToolkit().getImage(s);
+		return Toolkit.getDefaultToolkit().getImage(s);
     }
 	
-    public void play(String s){ 
-	//can not play sound from a frame
+    public void play(String s) {
+		//can not play sound from a frame
     }
 
-    /** Reads a file. The file name should be relative to current
-        directory. */
+    /**
+		Reads a file; the file name should be relative to current directory. 
+	*/
     public InputStream openFile(String name) {
-	File f;
-	// FileReader fr;
-	FileInputStream is = null;
-	String dir = System.getProperty("user.dir");
+		File f;
+		FileInputStream is = null;
+		String dir = System.getProperty("user.dir");
 
-	try {
-	    f = new File(dir, name);
-	    is = new FileInputStream(f);
-	    return is;
-	} catch (Exception e) {
-	    String msg = "Error opening file. Dir: " + dir + ", name: " + name + "\n";
-	    System.out.println(msg + e.toString());
-	} 
-	return null;
+		try {
+			f = new File(dir, name);
+			is = new FileInputStream(f);
+			return is;
+		} catch (Exception e) {
+			String msg = "Error opening file. Dir: " + dir + ", name: " + name + "\n";
+			System.out.println(msg + e.toString());
+		} 
+		return null;
     }
 
     public String getTask() { return task; }
