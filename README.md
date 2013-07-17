@@ -38,9 +38,9 @@ The newer version is the version that is under active development here.  I will 
 
 To see the fixes & new features I've applied to the original source code, view the [changelog](https://github.com/Wingman4l7/flightclub/blob/master/CHANGELOG.md).
 
-*Since that file doesn't actually exist yet, I'll list them here:*
+Here are the main fixes:
 
- - got the vario tones working again
+ - got the vario tones working again *(this isn't committed yet!)*
  - enabled the balloon glider type *(but not in the command-line arguments)*
  - mucked with the directory paths so a stand-alone executable JAR would work
 
@@ -48,39 +48,39 @@ To see the fixes & new features I've applied to the original source code, view t
 
 ### How To Compile ###
 
-This was compiled successfully with Java version ------.
+This was compiled successfully with Java version 1.7.0_25 *(Java Development Kit SE 7 Update 25)*.  I believe it has compiled successfully with previous versions.
 Some of the classes "use or ovveride a deprecated API"; also, "some input files use unchecked or unsafe operations."  It works fine though.  :)
+
+*Compile instructions coming soon!*
+
+I've packaged up some JAR files that run stand-alone for those who just wish to play with the last stable build or the latest experimental build.  These should run fine if you have Java installed.  You can [download Java here](http://java.com/en/download/index.jsp).  I will upload these to GitHub soon!
 
 ### How To Run ###
  
-The XCFrame class in `/startup/` implements Flight Club as an application.  It reads parameters in from the command line:
+The `XCFrame` class in `/startup/` implements Flight Club as an application.  It reads parameters in from the command line:
 
 `java flightclub/startup/XCFrame [task] [pilot_type] [host:port] [pgs hgs sps]`
 
 <!--- balloon glider type does not have a command-line parameter yet-->
 
-All the params are optional. If none are passed in the game loads defaults as follows: 
+All the parameteres are optional. If none are passed in the game loads defaults as follows: 
  - `task` = default
  - `pilot_type` = 1 (hg)
  - `host:port` = null (ie. single player mode)
- - pgs = 2, hgs = 4, sps = 2. <!--- does he mean the count?  I think so... -->
+ - pgs = 2, hgs = 4, sps = 2. 
+ 
+ <!--- last line: does he mean the count?  I think so... -->
 
-The last two params are mutually exclusive. Either we connect to a game server or we create a number of AI gliders.
+The last two parameters are mutually exclusive. Either we connect to a game server or we create a number of AI gliders.
 
 Alternatively, you can just double-click on the stand-alone executable to run it.  If you wish to use a non-default task or host / connect to a network game:
 `java -jar Flight_Club_3_02_xx.jar  [parameters]`
    
 ### How To Play ###
 
-For the game controls, view the [instructions] [IS]. 
+For game controls, objectives, and tips, view the [instructions] [IS]. 
  
 [IS]: https://github.com/Wingman4l7/flightclub/blob/master/INSTRUCTIONS.md
-
-Installation / Running
-----------------------
-*Compile instructions coming soon!*
-
-I've packaged up some JAR files that run stand-alone for those who just wish to play with the last stable build or the latest experimental build.  These should run fine if you have Java installed.  You can [download Java here](http://java.com/en/download/index.jsp).  I will upload these to GitHub soon!
 
 License
 -------

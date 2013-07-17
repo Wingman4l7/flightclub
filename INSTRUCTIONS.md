@@ -16,7 +16,9 @@ Thermals
 --------
 Cumulus clouds are fed by bubbles of warm rising air, called thermals. By using thermals, glider pilots are able to fly long distances. When you fly into a thermal you should circle to stay in the lift and climb up to cloud base.
 
-Your vario will start beeping when you are in a thermal. <!--- The higher pitch the beep is, the better *(faster)* the lift is.  -->
+Your vario will start beeping when you are in a thermal. 
+
+<!--- The higher pitch the beep is, the better *(faster)* the lift is.  -->
  
 <!--- <img src="ridge_b.gif" alt="Gliders ridge soaring"/> -->
 Ridge Lift
