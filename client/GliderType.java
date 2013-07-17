@@ -12,6 +12,7 @@ package flightclub.client;
 import flightclub.framework3d.*;
 import java.io.*;
 import java.util.Date;
+
 /**
    This class implements the reading and writing of data files for
    different types of glider. A glider's data file determines its
@@ -49,137 +50,139 @@ public class GliderType {
     static final int POLAR_LEN = 2; // just two points on polar curve
 
     /** 
-	Creates an instance of <code>typeName</code> or throws an IO
-	error. Opens the relevant data file, parses it and sets my
-	properties accordingly. This is the constructor used by the
-	client.  
+		Creates an instance of <code>typeName</code> or throws an IO
+		error. Opens the relevant data file, parses it and sets my
+		properties accordingly. This is the constructor used by the
+		client.  
     */
     public GliderType(ModelViewer modelViewer, String typeName, int typeID) throws IOException {
-	this.modelViewer = modelViewer;
-	this.typeName = typeName;
-	this.typeID = typeID;
-	parseFile();
+		this.modelViewer = modelViewer;
+		this.typeName = typeName;
+		this.typeID = typeID;
+		parseFile();
     }
 
     /** 
-	Creates an empty instance of glider type ready for you to
-	specify its properties. Use this constructor if you are
-	running glider type stand alone in order to *write* a def
-	file.
+		Creates an empty instance of glider type ready for you to
+		specify its properties. Use this constructor if you are
+		running glider type stand alone in order to *write* a def
+		file.
 
-	@see flightclub.data.Paraglider
-	@see flightclub.data.Hangglider
-	@see flightclub.data.Sailplane 
+		@see flightclub.data.Paraglider
+		@see flightclub.data.Hangglider
+		@see flightclub.data.Sailplane 
     */
     public GliderType(String typeName) {
-	this.typeName = typeName;
+		this.typeName = typeName;
     }
 
     private void parseFile() throws IOException {
-	InputStream is = modelViewer.modelEnv.openFile(typeName + ".txt");
-	StreamTokenizer st = new StreamTokenizer(new BufferedReader(new InputStreamReader(is)));
-	st.eolIsSignificant(true);
-	st.commentChar('#');
-	st.wordChars(':', ':');
+		InputStream is = modelViewer.modelEnv.openFile(typeName + ".txt");
+		StreamTokenizer st = new StreamTokenizer(new BufferedReader(new InputStreamReader(is)));
+		st.eolIsSignificant(true);
+		st.commentChar('#');
+		st.wordChars(':', ':');
 
-	// Tools3d.debugTokens(st);
+		// Tools3d.debugTokens(st);
 
-	// gobble EOL's due to comments
-	while (st.nextToken() == StreamTokenizer.TT_EOL) {;}
+		// gobble EOL's due to comments
+		while (st.nextToken() == StreamTokenizer.TT_EOL) {;}
 
-	// turn radius
-	if (! "TURN:".equals(st.sval))
-	    throw new FileFormatException("Unable to read turn radius: " + st.sval);
-	st.nextToken();
-	turnRadius = (float) st.nval;
-
-	// gobble new line
-	st.nextToken();	
-
-	// polar
-	st.nextToken();
-	if (! "POLAR:".equals(st.sval)) {
-	    throw new FileFormatException("Unable to read polar: " + st.sval);
-	}
-
-	polar = new float[POLAR_LEN][2];
-	int index = 0;
-	float speed, sink;
-
-	//  loop throw pairs of speed, sink data
-	while(st.nextToken() != StreamTokenizer.TT_EOL) {
-	    if (index < POLAR_LEN) {
-		polar[index][0] =  (float) st.nval;
-		st.nextToken();
-		polar[index][1] = (float) st.nval;
-		if (st.nextToken() != ',') {
-		    throw new FileFormatException("Error in polar data ! The required format is: \n\tPOLAR: <speed> <sink> , <speed> <sink> ,");
+		// turn radius
+		if (! "TURN:".equals(st.sval)) {
+			throw new FileFormatException("Unable to read turn radius: " + st.sval);
 		}
-	    }
-	    index++;
-	}
+		st.nextToken();
+		turnRadius = (float) st.nval;
 
-	// obj3d
-	st.nextToken();
-	if (! "OBJ3D:".equals(st.sval)) {
-	    throw new FileFormatException("Unable to read OBJ3D: " + st.sval);
-	}
+		// gobble new line
+		st.nextToken();	
 
-	// gobble new line
-	st.nextToken();	
-	
-	// parse the 3d model
-	obj = new Obj3dDir(st, modelViewer, false);
+		// polar
+		st.nextToken();
+		if (! "POLAR:".equals(st.sval)) {
+			throw new FileFormatException("Unable to read polar: " + st.sval);
+		}
 
-	// gobble any trailing EOL's
-	while (st.nextToken() == StreamTokenizer.TT_EOL) {;}
+		polar = new float[POLAR_LEN][2];
+		int index = 0;
+		float speed, sink;
 
-	// should be at end of file
-	is.close();
-	if (st.ttype != StreamTokenizer.TT_EOF)
-	    throw new FileFormatException(st.toString());
+		//  loop throw pairs of speed, sink data
+		while(st.nextToken() != StreamTokenizer.TT_EOL) {
+			if (index < POLAR_LEN) {
+				polar[index][0] =  (float) st.nval;
+				st.nextToken();
+				polar[index][1] = (float) st.nval;
+				if (st.nextToken() != ',') {
+					throw new FileFormatException("Error in polar data ! The required format is: \n\tPOLAR: <speed> <sink> , <speed> <sink> ,");
+				}
+			}
+			index++;
+		}
+
+		// obj3d
+		st.nextToken();
+		if (! "OBJ3D:".equals(st.sval)) {
+			throw new FileFormatException("Unable to read OBJ3D: " + st.sval);
+		}
+
+		// gobble new line
+		st.nextToken();	
+		
+		// parse the 3d model
+		obj = new Obj3dDir(st, modelViewer, false);
+
+		// gobble any trailing EOL's
+		while (st.nextToken() == StreamTokenizer.TT_EOL) {;}
+
+		// should be at end of file
+		is.close();
+		if (st.ttype != StreamTokenizer.TT_EOF) {
+			throw new FileFormatException(st.toString());
+		}
     }
 
     /**
        Outputs the data for this type of glider to a text file.
     */
     public void writeFile() throws IOException {
-	File f = new File(typeName + ".txt");
-	FileWriter out = null;
+		File f = new File(typeName + ".txt");
+		FileWriter out = null;
 
-	try {
-	    out = new FileWriter(f);
-	    String s = this.toString(); 
-	    out.write(s, 0, s.length());
-	} finally {
-	    if (out != null) {
-		try { out.close(); } catch (IOException e) {;}
-	    }
-	}
+		try {
+			out = new FileWriter(f);
+			String s = this.toString(); 
+			out.write(s, 0, s.length());
+		} finally {
+			if (out != null) {
+			try { out.close(); } catch (IOException e) {;}
+			}
+		}
     }
 
     public String toString() {
-	StringBuffer sb = new StringBuffer();
+		StringBuffer sb = new StringBuffer();
 
-	// header - type name and date
-	Date today =  new Date();
-	sb.append("# " + typeName + "\n# " + today.toString() + "\n");
+		// header - type name and date
+		Date today =  new Date();
+		sb.append("# " + typeName + "\n# " + today.toString() + "\n");
 
-	// turn
-	sb.append("TURN: " + Tools3d.round(turnRadius) + "\n");
+		// turn
+		sb.append("TURN: " + Tools3d.round(turnRadius) + "\n");
 
-	// polar
-	sb.append("POLAR: ");
-	for (int i = 0; i < POLAR_LEN; i ++) {
-	    sb.append(Tools3d.round(polar[i][0]) + " "
-		  + Tools3d.round(polar[i][1])
-		  + " , ");
-	}
-	sb.append("\n");
+		// polar
+		sb.append("POLAR: ");
+		for (int i = 0; i < POLAR_LEN; i ++) {
+			sb.append(Tools3d.round(polar[i][0]) + " "
+			  + Tools3d.round(polar[i][1])
+			  + " , ");
+		}
+		sb.append("\n");
 
-	// obj3d
-	sb.append("OBJ3D: \n");
-	sb.append(obj.toString());
-	return new String(sb);
+		// obj3d
+		sb.append("OBJ3D: \n");
+		sb.append(obj.toString());
+		return new String(sb);
     }
 }

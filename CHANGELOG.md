@@ -33,11 +33,15 @@
   
 ### Task ###
  
-  - normalized indentation
+ - normalized indentation
 
 ### XCCameraMan ###
 
-  - normalized indentation
+ - normalized indentation
+  
+### GliderManager ###
+
+ - normalized indentation
 
   
 ## /framework3d ##
