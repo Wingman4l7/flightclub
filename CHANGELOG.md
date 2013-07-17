@@ -26,6 +26,10 @@
 ### XCModelViewer ###
  
  - normalized indentation
+ 
+### XCModel ###
+
+ - normalized indentation 
   
 ### Task ###
  

@@ -12,9 +12,9 @@ package flightclub.client;
 import flightclub.framework3d.*;
 import java.io.IOException;
 import java.awt.event.*;
+
 /**
-   This class implements the top level manager for the flight club
-   game.
+   This class implements the top level manager for the flight club game.
 */
 public class XCModel extends Model {
     XCModelViewer xcModelViewer;
@@ -23,9 +23,11 @@ public class XCModel extends Model {
     Compass compass = null;
     DataSlider slider = null;
 
-    /** An intermediate var gives us a casted reference to the camera
-     * man. I'm not sure if this is good style. What if the camera man
-     * object changes ? Then this link points to the wrong object !*/
+    /** 
+		An intermediate var gives us a casted reference to the camera
+		man. I'm not sure if this is good style. What if the camera man
+		object changes ? Then this link points to the wrong object !
+	 */
     private XCCameraMan xcCameraMan; 
     int mode;
 
@@ -33,9 +35,9 @@ public class XCModel extends Model {
     static final int USER = 1;
 
     public XCModel(XCModelViewer xcModelViewer) {
-	super(xcModelViewer);
-	this.xcModelViewer = xcModelViewer;
-	xcCameraMan = (XCCameraMan) xcModelViewer.cameraMan;
+		super(xcModelViewer);
+		this.xcModelViewer = xcModelViewer;
+		xcCameraMan = (XCCameraMan) xcModelViewer.cameraMan;
     }
 
     // don't want the super classes model (a cube).
@@ -49,34 +51,34 @@ public class XCModel extends Model {
        has gone belly up !
      */
     public void loadTask(String id, int pilotType, int[] typeNums) {
-	String msg;
+		String msg;
 
-	if (id == null || id.equals("") || id.equals("default")) {
-	    msg = "Loading default task...";
-	    xcModelViewer.modelCanvas.setText(msg, PROMPT_LINE);
-	    System.out.println(msg);
-	    task = new Task(xcModelViewer); // default task
-	} else {
-	    xcModelViewer.modelCanvas.setText("Loading task: " + id + "...", PROMPT_LINE);
-	    try {
-		task = new Task(xcModelViewer, id);
-	    } catch (Exception e) {
-		msg = "Error loading task: " + id + "\n" + e;
-		xcModelViewer.modelCanvas.setText(msg, PROMPT_LINE);
-		System.out.println(msg);
-		System.exit(1); // ?
-	    } 
-	}
+		if (id == null || id.equals("") || id.equals("default")) {
+			msg = "Loading default task...";
+			xcModelViewer.modelCanvas.setText(msg, PROMPT_LINE);
+			System.out.println(msg);
+			task = new Task(xcModelViewer); // default task
+		} else {
+			xcModelViewer.modelCanvas.setText("Loading task: " + id + "...", PROMPT_LINE);
+			try {
+			task = new Task(xcModelViewer, id);
+			} catch (Exception e) {
+			msg = "Error loading task: " + id + "\n" + e;
+			xcModelViewer.modelCanvas.setText(msg, PROMPT_LINE);
+			System.out.println(msg);
+			System.exit(1); // ?
+			} 
+		}
 
-	gliderManager = new GliderManager(xcModelViewer, pilotType);
-        if (!xcModelViewer.netFlag) {
-	    if (typeNums != null) {
-		gliderManager.createAIs(typeNums[0], typeNums[1], typeNums[2]);
-	    } else {
-		// defaults 
-		gliderManager.createAIs(3, 3, 3);
-	    }
-	}
+		gliderManager = new GliderManager(xcModelViewer, pilotType);
+			if (!xcModelViewer.netFlag) {
+			if (typeNums != null) {
+			gliderManager.createAIs(typeNums[0], typeNums[1], typeNums[2]);
+			} else {
+			// defaults 
+			gliderManager.createAIs(3, 3, 3);
+			}
+		}
     }
 
     private boolean userPlay_ = false; // flag true *after* calling startPlay
