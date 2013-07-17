@@ -88,42 +88,42 @@ public class XCModel extends Model {
        glider.
     */
     void startPlay() {
-	xcCameraMan.gotoTaskStart();
-	if (userPlay_) { // user pressed <y>
-	    gliderManager.launchUser();
-	    xcCameraMan.setMode(XCCameraMan.USER);
-	    promptTakeOff(false);
+		xcCameraMan.gotoTaskStart();
+		if (userPlay_) { // user pressed <y>
+			gliderManager.launchUser();
+			xcCameraMan.setMode(XCCameraMan.USER);
+			promptTakeOff(false);
 
-	    if (!doneInstruments) {
-		createInstruments();
-		mode = USER;
-	    }
-	}
+			if (!doneInstruments) {
+				createInstruments();
+				mode = USER;
+			}
+		}
 
-        if (xcModelViewer.xcNet == null) {
-	    gliderManager.launchAIs();
-	    task.nodeManager.loadNodes(0, xcModelViewer.clock.getTime());
-	} else {
-	    if (xcModelViewer.netTimeFlag) {
-		task.nodeManager.loadNodes(0, xcModelViewer.clock.getTime());
-	    }
-	}
+			if (xcModelViewer.xcNet == null) {
+				gliderManager.launchAIs();
+				task.nodeManager.loadNodes(0, xcModelViewer.clock.getTime());
+			} else {
+				if (xcModelViewer.netTimeFlag) {
+					task.nodeManager.loadNodes(0, xcModelViewer.clock.getTime());
+			}
+		}
 
-	if (!userPlay_) {
-	    if (xcModelViewer.xcNet == null) {
-		xcCameraMan.setMode(XCCameraMan.GAGGLE);
-	    } else {
-		// stay put ?
-	    }
-	    promptTakeOff(true);
-	    mode = DEMO;
-	}
+		if (!userPlay_) {
+			if (xcModelViewer.xcNet == null) {
+				xcCameraMan.setMode(XCCameraMan.GAGGLE);
+			} else {
+				// stay put ?
+			}
+			promptTakeOff(true);
+			mode = DEMO;
+		}
 
-	// check these toggles are off
-	if (modelViewer.clock.paused) togglePause();
-	if (modelViewer.clock.speedy) toggleFastForward();
+		// check these toggles are off
+		if (modelViewer.clock.paused) togglePause();
+		if (modelViewer.clock.speedy) toggleFastForward();
 
-	userPlay_ = true;
+		userPlay_ = true;
     }	
 
     /**
@@ -132,27 +132,26 @@ public class XCModel extends Model {
        for cloud watching.
     */
     void toggleFastForward() {
-	modelViewer.clock.speedy = !modelViewer.clock.speedy;
+		modelViewer.clock.speedy = !modelViewer.clock.speedy;
     } 
 
     void togglePause() {
-	modelViewer.clock.paused = !modelViewer.clock.paused;
+		modelViewer.clock.paused = !modelViewer.clock.paused;
     }
-
 
     private boolean doneInstruments = false;
     /**
        Creates the compass and vario.
     */
     private void createInstruments() {
-	int width = modelViewer.modelCanvas.getSize().width;
-	int height = modelViewer.modelCanvas.getSize().height;
-	float vmax = -2 * gliderManager.gliderUser.getSink(1);
-	
-	compass = new Compass(modelViewer, 25, width - 30, height- 15);
-	slider = new DataSlider(modelViewer, -vmax, vmax, 30, width - 60, height - 15);
-	slider.label = "vario";
-	doneInstruments = true;
+		int width = modelViewer.modelCanvas.getSize().width;
+		int height = modelViewer.modelCanvas.getSize().height;
+		float vmax = -2 * gliderManager.gliderUser.getSink(1);
+		
+		compass = new Compass(modelViewer, 25, width - 30, height- 15);
+		slider = new DataSlider(modelViewer, -vmax, vmax, 30, width - 60, height - 15);
+		slider.label = "vario";
+		doneInstruments = true;
     }
 
     private float t_ = 0;
@@ -161,111 +160,109 @@ public class XCModel extends Model {
     static final int SERVER_LINE = 1;
     static final int PROMPT_LINE = 0; // 0 is bottom line
     /**
-       If we are in user mode then update the instruments and the status
-       messages.
+       If we are in user mode then update the instruments and the status messages.
     */
     public void tick(float t, float dt) {
-	if (t < t_ + T_INTERVAL) {
-	    return;
-	}
+		if (t < t_ + T_INTERVAL) {
+			return;
+		}
 
-	t_ = t;
+		t_ = t;
 
-	if (mode == USER) {
-	    Glider g = gliderManager.gliderUser;
-	    compass.setArrow(g.v[0], g.v[1]);
-	    slider.setValue(g.getSink() + g.air[2]);
+		if (mode == USER) {
+			Glider g = gliderManager.gliderUser;
+			compass.setArrow(g.v[0], g.v[1]);
+			slider.setValue(g.getSink() + g.air[2]);
 
-	    modelViewer.modelCanvas.setText(g.getStatusMsg(), GLIDER_LINE);
-	    if (g.getLanded()) {
-		promptTakeOff(true);
-	    }
-	}
+			modelViewer.modelCanvas.setText(g.getStatusMsg(), GLIDER_LINE);
+			if (g.getLanded()) {
+				promptTakeOff(true);
+			}
+		}
 
-	// server status
-	serverStatus();
+		// server status
+		serverStatus();
 
-    	// frame rate for when testing etc
-	//status += " (F: " + modelViewer.clock.getFrameRate() + ")"; //tmp
+		// frame rate for when testing etc
+		//status += " (F: " + modelViewer.clock.getFrameRate() + ")"; //tmp
     }	
 
 
     /**
-       Display server info. Lumped camera status in here aswell !
+       Display server info. Lumped camera status in here as well !
     */
     void serverStatus() {
-	String s;
-	if (xcModelViewer.xcNet == null) {
-	    s = "Offline";
-	} else {
-	    int n = 1 + gliderManager.numNet;
-	    s = n + " pilots online";
-	}
-	modelViewer.modelCanvas.setText(s + ", " 
-					+ xcCameraMan.getStatusMsg(), SERVER_LINE);
+		String s;
+		if (xcModelViewer.xcNet == null) {
+			s = "Offline";
+		} else {
+			int n = 1 + gliderManager.numNet;
+			s = n + " pilots online";
+		}
+		modelViewer.modelCanvas.setText(s + ", " + xcCameraMan.getStatusMsg(), SERVER_LINE);
     }
 
     public void keyPressed(KeyEvent e) {
-	int key = e.getKeyCode();
-	System.out.println("Key: " + key);
+		int key = e.getKeyCode();
+		System.out.println("Key: " + key);
 
-	switch (key) {
-	case 112://p - pause (offline only)
-	case 112-32:
-	    if (xcModelViewer.xcNet == null) {
-		togglePause(); 
-	    }
-	    break;
-	case 121://y - start play
-	case 121-32:
-	    if (prompting) {
-		startPlay(); break;
-	    }
-	case 113://q - game speed (offline only)
-	case 113-32:
-	    if (xcModelViewer.xcNet == null) {
-		toggleFastForward();
-	    }
-	    break;
-        case 49: //1
-            xcCameraMan.setMode(XCCameraMan.USER);
-            return;
-        case 50: //2
-            xcCameraMan.setMode(XCCameraMan.GAGGLE);
-            return;
-        case 51: //3
-            xcCameraMan.setMode(XCCameraMan.PLAN);
-            return;
-        case 52: //4
-            xcCameraMan.setMode(XCCameraMan.NODE);
-            return;
-        case 53: //5
-            xcCameraMan.setMode(XCCameraMan.TASK);
-            return;
-        case 54: //6
-            xcCameraMan.setMode(XCCameraMan.PILOT);
-            return;
-        case 55: //7
-            xcCameraMan.setMode(XCCameraMan.STAY_THERE);
-            return;
-        case 45: //-
-            xcCameraMan.pullOut();
-            return;
-        case 61: //+
-            xcCameraMan.pullIn();
-            return;
-        case 37://left arrow
-	    if (prompting) {
-		cycleType(-1);
-	    }
-	    break;
-        case 39://right arrow
-	    if (prompting) {
-		cycleType(1);
-	    }
-	    break;
-	default:
-	}
+		switch (key) {
+		case 112: //p - pause (offline only)
+		case 112-32:
+			if (xcModelViewer.xcNet == null) {
+				togglePause(); 
+			}
+			break;
+		case 121: //y - start play
+		case 121-32:
+			if (prompting) {
+				startPlay(); break;
+			}
+		case 113: //q - game speed (offline only)
+		case 113-32:
+			if (xcModelViewer.xcNet == null) {
+				toggleFastForward();
+			}
+			break;
+			case 49: //1
+				xcCameraMan.setMode(XCCameraMan.USER);
+				return;
+			case 50: //2
+				xcCameraMan.setMode(XCCameraMan.GAGGLE);
+				return;
+			case 51: //3
+				xcCameraMan.setMode(XCCameraMan.PLAN);
+				return;
+			case 52: //4
+				xcCameraMan.setMode(XCCameraMan.NODE);
+				return;
+			case 53: //5
+				xcCameraMan.setMode(XCCameraMan.TASK);
+				return;
+			case 54: //6
+				xcCameraMan.setMode(XCCameraMan.PILOT);
+				return;
+			case 55: //7
+				xcCameraMan.setMode(XCCameraMan.STAY_THERE);
+				return;
+			case 45: //-
+				xcCameraMan.pullOut();
+				return;
+			case 61: //+
+				xcCameraMan.pullIn();
+				return;
+			case 37: //left arrow
+			if (prompting) {
+			cycleType(-1);
+			}
+			break;
+			case 39: //right arrow
+			if (prompting) {
+			cycleType(1);
+			}
+			break;
+		default:
+		}
     }
 
     public void keyReleased(KeyEvent e) {;}
@@ -275,45 +272,43 @@ public class XCModel extends Model {
        Cycles thru the glider types. 
     */
     void cycleType(int dir) {
-	gliderType += dir;
-	if (gliderType < 0) {
-	    gliderType = GliderManager.NUM_TYPES - 1;
-	}
-	if (gliderType >= GliderManager.NUM_TYPES) {
-	    gliderType = 0;
-	}
-	promptTakeOff(true); // update display
-	gliderManager.createUser(gliderType); 
-	xcCameraMan.setMode(XCCameraMan.USER); // look at my new glider
+		gliderType += dir;
+		if (gliderType < 0) {
+			gliderType = GliderManager.NUM_TYPES - 1;
+		}
+		if (gliderType >= GliderManager.NUM_TYPES) {
+			gliderType = 0;
+		}
+		promptTakeOff(true); // update display
+		gliderManager.createUser(gliderType); 
+		xcCameraMan.setMode(XCCameraMan.USER); // look at my new glider
     }
 
     private boolean prompting = false;
-
     /**
-       Prompts user to press y to take off. Set flag to false to clear
-       this prompt when user has taken off.
+       Prompts user to press y to take off. 
+	   Set flag to false to clear this prompt when user has taken off.
     */
     void promptTakeOff(boolean flag) {
-	String s;
-	String ss = "";
+		String s;
+		String ss = "";
 
-	// list of glider types - highlight the current choice
-	for (int i = 0; i < GliderManager.NUM_TYPES; i++) {
-	    if (gliderType == i) {
-		ss += " <" + GliderManager.typeNames[i] + "> ";
-	    } else {
-		ss += "  " + GliderManager.typeNames[i] + "  ";
-	    }
-	}
+		// list of glider types - highlight the current choice
+		for (int i = 0; i < GliderManager.NUM_TYPES; i++) {
+			if (gliderType == i) {
+				ss += " <" + GliderManager.typeNames[i] + "> ";
+			} else {
+				ss += "  " + GliderManager.typeNames[i] + "  ";
+			}
+		}
 
-	if (flag) {
-	    s = "Press <y> to take off. Use left/right arrow keys to choose your wing ("
-		+ ss + ").";
-	} else {
-	    s = "";
-	}
-	modelViewer.modelCanvas.setText(s, PROMPT_LINE);
-	prompting = flag;
+		if (flag) {
+			s = "Press <y> to take off. Use left/right arrow keys to choose your wing (" + ss + ").";
+		} else {
+			s = "";
+		}
+		modelViewer.modelCanvas.setText(s, PROMPT_LINE);
+		prompting = flag;
     }
 
 }
