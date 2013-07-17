@@ -11,7 +11,7 @@
   
 ### ModelFrame ###
   
- - 
+ - added code to play() so vario sounds would work
  - normalized indentation 
   
   
