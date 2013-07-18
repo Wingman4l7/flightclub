@@ -90,7 +90,7 @@ public class ModelViewer extends Panel implements ClockObserver, ModelViewerThin
 		modelCanvas.repaint();
 
 		// uncomment next line to see frame rate
-		//modelCanvas.setText("F: " + clock.getFrameRate());
+		//modelCanvas.setText("F: " + clock.getFrameRate()); //this call has an error; requires a second argument -- "int line"
     }
 
     protected void createModelCanvas() {
