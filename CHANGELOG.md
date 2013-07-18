@@ -58,9 +58,21 @@
 ### CameraMan ###
 
  - normalized indentation
+
+### ModelCanvas ###
+
+ - normalized indentation
  
  
 ## /task ##
+
+### Point.java ###
+
+ - normalized indentation
+ 
+### ParameterCanvas.java ###
+
+ - normalized indentation
 
 ### TaskDesigner ###
 

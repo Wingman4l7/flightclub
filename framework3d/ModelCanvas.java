@@ -160,7 +160,7 @@ public class ModelCanvas extends Canvas {
 			if (textMessage[i] != null && textMessage[i].length() > 0) {
 				graphicsBuffer.drawString(textMessage[i], 15, height - 15 * (i + 1));
 			}
-			}
+		}
     }
 
     /**
