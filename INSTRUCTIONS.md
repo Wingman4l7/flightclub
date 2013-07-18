@@ -24,6 +24,7 @@ Your vario will start beeping when you are in a thermal.
 Ridge Lift
 ----------
 *Note: There may not be any hills in the default task map for v3.02x*
+
 Hills produce lift as the wind flows over them. A glider may ridge soar by flying back and forth in the rising air in front of the hill.
 
 Glider pilots also like hills because they function as reliable thermal triggers.
@@ -32,6 +33,7 @@ Glider pilots also like hills because they function as reliable thermal triggers
 Your mission
 ------------
 *Note: This is from v3.01 and is outdated.  Update soon...*
+
 Race against the other gliders; the finish line is 100 km away to the north.
 
 A note on navigation: To find the finish line, simply follow the road that runs north. You have a compass at the bottom right.
@@ -40,6 +42,7 @@ A note on navigation: To find the finish line, simply follow the road that runs 
 Points of View
 --------------
 *Note: These are from v3.01 and are outdated.  Update soon...*
+
 Drag the mouse to rotate the camera position. You may switch between points of view using the number keys...
 
  - `1` focus on your glider
