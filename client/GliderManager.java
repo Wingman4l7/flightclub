@@ -41,7 +41,7 @@ public class GliderManager implements ClockObserver {
 		}
     }
 
-    static GliderType[] types = new GliderType[3]; // array of glider types (pg, hg, sp, bl)
+    static GliderType[] types = new GliderType[4]; // array of glider types (pg, hg, sp, bl)
 
     /** 
 		Loads the glider types (reads polar data etc from a text file). 
