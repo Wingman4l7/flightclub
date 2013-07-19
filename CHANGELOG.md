@@ -19,64 +19,27 @@
   
 ## /client ##
  
+ - normalized indentation for classes: `Variomeer`, `XCModelViewer`, `XCModel`, `Task`, `XCCameraMan`, `GliderManager`, `GliderType`
+ 
 ### Variometer ###
  - changed file reference from .au to .wav to be compatible with new  play() code
- - normalized indentation
- 
-### XCModelViewer ###
- 
- - normalized indentation
- 
-### XCModel ###
-
- - normalized indentation 
-  
-### Task ###
- 
- - normalized indentation
-
-### XCCameraMan ###
-
- - normalized indentation
   
 ### GliderManager ###
 
- - normalized indentation
  - enabled Balloon glider-type 
-
-### GliderType ###
-
- - normalized indentation 
  
   
 ## /framework3d ##
 
-### ModelViewer ###
+ - normalized indentation for classes: 	`ModelViewer`, `CameraMan`, `ModelCanvas`
 
- - normalized indentation
-  
-### CameraMan ###
-
- - normalized indentation
-
-### ModelCanvas ###
-
- - normalized indentation
- 
  
 ## /task ##
 
-### Point.java ###
-
- - normalized indentation
- 
-### ParameterCanvas.java ###
-
- - normalized indentation
+  - normalized indentation for all classes (`Link`, `TaskDesigner`, `ParameterCanvas`, `Point`, `TaskApplet`, `FileFormatException`, `TaskFrame`)
 
 ### TaskDesigner ###
 
- - normalized indentation
  - TODO: add missing bits or, in the meantime, add error handling to gracefully fail when someone tries to use them
  
  
