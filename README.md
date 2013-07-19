@@ -8,7 +8,7 @@
 
 ## About ##
 
-This arcade-style 3D gliding simulator was written by the late Dan Burton.  His original website is available [from the Internet Archive] [archive].  The networking code for multiplayer was written by Artem Nikulchev (<jaguart@paragliding.ru>), a paraglider pilot from Moscow.
+This arcade-style 3D gliding simulator was written by the late Dan Burton.  His original website is available [from the Internet Archive] [archive].  The networking code for multiplayer and the code for the paraglider & pilot shapes were written by Artem Nikulchev (<jaguart@paragliding.ru>), a paraglider pilot from Moscow.
 
 After his website went offline I decided that I couldn't abide by such a sleek little game slipping into obscurity.  I have resurrected it here, and have applied some basic fixes to get it working again.  *(See the [changelog] [CL_sublink] for details.)*
 

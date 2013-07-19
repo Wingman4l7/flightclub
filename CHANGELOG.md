@@ -78,3 +78,8 @@
 
  - normalized indentation
  - TODO: add missing bits or, in the meantime, add error handling to gracefully fail when someone tries to use them
+ 
+ 
+ ## /data ##
+ 
+  - normalized indentation for all classes (`Balloon`, `HangGlider`, `Paraglider`, `Person`, `Sailplane`)

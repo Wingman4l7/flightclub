@@ -14,6 +14,7 @@ import flightclub.client.GliderType;
 import java.awt.*;
 import java.util.*;
 import java.io.IOException;
+
 /**
    This class outputs a text file of data for a paraglider. See
    GliderType for a definition of the file format. The file
@@ -25,92 +26,93 @@ import java.io.IOException;
 public class Paraglider extends GliderType {
 
     Paraglider() { 
-	super("paraglider"); 
-	obj = new Paraglider3d(null, false);
-	polar = new float[][] {{0.4f, - 0.4f/7}, {0.6f, -0.6f/4}};
-	turnRadius = 0.2f;
+		super("paraglider"); 
+		obj = new Paraglider3d(null, false);
+		polar = new float[][] {{0.4f, - 0.4f/7}, {0.6f, -0.6f/4}};
+		turnRadius = 0.2f;
     }
 
     public static void main (String[] args) {
-	Paraglider p = new Paraglider();
-	System.out.println(p.toString());
-	try {
-	    p.writeFile();
-	    System.out.println("Wrote the data file for the paraglider.");
-	} catch (IOException e) {
-	    System.out.println("Error: " + e.toString());
-	}
+		Paraglider p = new Paraglider();
+		System.out.println(p.toString());
+		try {
+			p.writeFile();
+			System.out.println("Wrote the data file for the paraglider.");
+		} catch (IOException e) {
+			System.out.println("Error: " + e.toString());
+		}
     }
 }
 
 class Paraglider3d extends Obj3dDir {
+
     public Paraglider3d(ModelViewer modelViewer, boolean register) {
-	super(modelViewer, 6 + Person.NUM_POLYGONS, register);
-	init();
+		super(modelViewer, 6 + Person.NUM_POLYGONS, register);
+		init();
     }
 
     private void init() {
-                /* There is two elements within model: paraglider & pilot
+        /* There is two elements within model: paraglider & pilot
 
-                                      .       |       .
-                        .             |       |       |          .
-                  .     |             |       |       |          |       .
-                     C* |      B*     |   A*  |   A   |     B    |   C   |
-                  .     |             |       |       |          |       .
-                        .             |       |       |          .
-                                      .       |       .
-
-
+                              .       |       .
+                .             |       |       |          .
+          .     |             |       |       |          |       .
+             C* |      B*     |   A*  |   A   |     B    |   C   |
+          .     |             |       |       |          |       .
+                .             |       |       |          .
+                              .       |       .
 
 
-                & pilot
 
 
-                            .-------.              .
-                            |       |              |\
-                            |       |             b| \f
-                            | back  |             a|  \r
-                            |       |             c|   \o
-                            |       |             k|    \n
-                            .-------.              |     \t
-                             \bottom \             |diago-\
-                              \       \            |nal sides
-                               .-------.           .--------\
-                                                     bottom
-                */
+        & pilot
 
-	float scaleModel = 0.1f;
 
-	float Xa = 0.25f;
-	float Xb = 0.8f;
-	float X0 = 0;
-	float X1 = 1;
+                    .-------.              .
+                    |       |              |\
+                    |       |             b| \f
+                    | back  |             a|  \r
+                    |       |             c|   \o
+                    |       |             k|    \n
+                    .-------.              |     \t
+                     \bottom \             |diago-\
+                      \       \            |nal sides
+                       .-------.           .--------\
+                                             bottom
+        */
 
-	float Y0  = 0;
-	float Y1  = 0.3f;
-	float Yb  = 0.24f;
-	float Yb_= 0.03f;
-	float Yc  = 0.2f;
-	float Yc_= 0.09f;
+		float scaleModel = 0.1f;
 
-	float Z0 = 1.4f;
-	float Zb = Z0 - 0.1f;
-	float Zc = Z0 - 0.3f;
+		float Xa = 0.25f;
+		float Xb = 0.8f;
+		float X0 = 0;
+		float X1 = 1;
 
-	float fLK = 0.1f;
+		float Y0  = 0;
+		float Y1  = 0.3f;
+		float Yb  = 0.24f;
+		float Yb_= 0.03f;
+		float Yc  = 0.2f;
+		float Yc_= 0.09f;
 
-	//Panels A, B and C
-	this.addPolygon2(new float[][] {{X0,Y1,Z0+fLK}, {Xa,Y1,Z0+fLK}, {Xa,Y0,Z0}, {X0,Y0,Z0}});
-	this.addPolygon2(new float[][] {{Xa,Y1,Z0+fLK}, {Xb,Yb,Zb+fLK}, {Xb,Yb_,Zb}, {Xa,Y0,Z0}});
-	this.addPolygon2(new float[][] {{Xb,Yb,Zb+fLK}, {X1,Yc,Zc+fLK}, {X1,Yc_,Zc}, {Xb,Yb_,Zb}});
+		float Z0 = 1.4f;
+		float Zb = Z0 - 0.1f;
+		float Zc = Z0 - 0.3f;
 
-	//Panels A*, B* and C*
-	this.addPolygon2(new float[][] {{-X0,Y1,Z0+fLK}, {-Xa,Y1,Z0+fLK}, {-Xa,Y0,Z0}, {-X0,Y0,Z0}});
-	this.addPolygon2(new float[][] {{-Xa,Y1,Z0+fLK}, {-Xb,Yb,Zb+fLK}, {-Xb,Yb_,Zb}, {-Xa,Y0,Z0}});
-	this.addPolygon2(new float[][] {{-Xb,Yb,Zb+fLK}, {-X1,Yc,Zc+fLK}, {-X1,Yc_,Zc}, {-Xb,Yb_,Zb}});
-	scaleBy(scaleModel);
+		float fLK = 0.1f;
 
-	Person.addPilot(this, Person.PG);
+		//Panels A, B and C
+		this.addPolygon2(new float[][] {{X0,Y1,Z0+fLK}, {Xa,Y1,Z0+fLK}, {Xa,Y0,Z0}, {X0,Y0,Z0}});
+		this.addPolygon2(new float[][] {{Xa,Y1,Z0+fLK}, {Xb,Yb,Zb+fLK}, {Xb,Yb_,Zb}, {Xa,Y0,Z0}});
+		this.addPolygon2(new float[][] {{Xb,Yb,Zb+fLK}, {X1,Yc,Zc+fLK}, {X1,Yc_,Zc}, {Xb,Yb_,Zb}});
+
+		//Panels A*, B* and C*
+		this.addPolygon2(new float[][] {{-X0,Y1,Z0+fLK}, {-Xa,Y1,Z0+fLK}, {-Xa,Y0,Z0}, {-X0,Y0,Z0}});
+		this.addPolygon2(new float[][] {{-Xa,Y1,Z0+fLK}, {-Xb,Yb,Zb+fLK}, {-Xb,Yb_,Zb}, {-Xa,Y0,Z0}});
+		this.addPolygon2(new float[][] {{-Xb,Yb,Zb+fLK}, {-X1,Yc,Zc+fLK}, {-X1,Yc_,Zc}, {-Xb,Yb_,Zb}});
+		scaleBy(scaleModel);
+
+		Person.addPilot(this, Person.PG);
     }
 }
 
