@@ -12,9 +12,7 @@ package flightclub.client;
 import flightclub.framework3d.*;
 import java.io.*;
 
-/**
-   This class implements a task.
-*/
+/** This class implements a task. */
 public class Task implements CameraSubject {
     XCModelViewer xcModelViewer;
     String taskID;
@@ -27,9 +25,7 @@ public class Task implements CameraSubject {
     // for the default course
     static final float HEXAGON = Cloud.CLOUDBASE * 7; //8;
 
-    /**
-       Parses the specifed file to create the task.
-    */
+    /** Parses the specifed file to create the task. */
     public Task(XCModelViewer xcModelViewer, String taskID) throws IOException {
 		this.xcModelViewer = xcModelViewer;
 		this.taskID = taskID;
@@ -37,9 +33,7 @@ public class Task implements CameraSubject {
 		nodeManager = new NodeManager(xcModelViewer, this);
     }
 
-    /**
-       No file to parse. Create a simple default task.
-     */
+    /** No file to parse. Create a simple default task. */
     public Task(XCModelViewer xcModelViewer) {
 		this.xcModelViewer = xcModelViewer;
 		this.taskID = "default";
@@ -122,9 +116,7 @@ public class Task implements CameraSubject {
 		}
     }
 
-    /**
-       Returns the total distance of this task.
-    */
+    /** Returns the total distance of this task. */
     float getTotalDistance() { return turnPointManager.getTotalDistance(); }
 
     /** Prints debug info. */
@@ -135,9 +127,7 @@ public class Task implements CameraSubject {
 		nodeManager.asString();
     }
 
-    /**
-       Returns the mid point of the bounding box.
-    */
+    /** Returns the mid point of the bounding box. */
     public float[] getFocus() {
 		float[] a = new float[3];
 		float[] b = new float[3];
