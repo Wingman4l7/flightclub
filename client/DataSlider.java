@@ -7,7 +7,6 @@
   Flight Club docs located at http://www.danb.dircon.co.uk/hg/hg.htm
   Dan Burton , Nov 2001 
 */
-
 package flightclub.client;
 
 import flightclub.framework3d.*;
@@ -16,8 +15,7 @@ import java.util.*;
 
 /**
    This class implements a dot on a line - use for eg vario minimal
-   design. cf. Toshiba scan of Fred (update 2003 - Fred became Oscar
-   !)
+   design. cf. Toshiba scan of Fred (update 2003 - Fred became Oscar!)
 */
 class DataSlider {
     ModelViewer app;
@@ -35,51 +33,45 @@ class DataSlider {
     static final int dy = 10; //pixel space for label at bottom
 		
     public DataSlider(ModelViewer theApp, float inV_min, float inV_max,int inSize, int inX0, int inY0) { 
-	app  = theApp; 
-	v_min = inV_min;
-	v_max = inV_max;
-	size = inSize;
-	x0 = inX0;
-	y0 = inY0;
-	init();
+		app  = theApp; 
+		v_min = inV_min;
+		v_max = inV_max;
+		size = inSize;
+		x0 = inX0;
+		y0 = inY0;
+		init();
     }
 	
     public DataSlider(ModelViewer theApp) {this(theApp, -1, 1, SIZE_DEFAULT, 50, 42);}
 	
     void init() {
-	/*
-	  need this ?
-	*/
-	setValue((v_min + v_max)/2);
+	// need this?
+		setValue((v_min + v_max)/2);
     }
 	
     void setValue(float inV) {
-	/*
-	  clamp value and convert to 'screen' coords
-	*/
-	v = inV;
-	if (v <= v_min) v = v_min;
-	if (inV >= v_max) v = v_max;
-	
-	v = inV;
-	v_ = (int) (((v - v_min)/(v_max - v_min)) * size);
+		// clamp value and convert to 'screen' coords
+		v = inV;
+		if (v <= v_min) v = v_min;
+		if (inV >= v_max) v = v_max;
+		
+		v = inV;
+		v_ = (int) (((v - v_min)/(v_max - v_min)) * size);
     }
 	
     public void draw (Graphics g) {
-
-	g.setColor(color);
-	g.drawLine(x0 - dx, y0 - size - dy, x0 + dx, y0 - size - dy);
-	g.drawLine(x0 - dx, y0 - dy, x0 + dx, y0 - dy);
-	g.drawLine(x0, y0 - dy, x0, y0 - size - dy);
-		
-	if (label!=null) {
-	    Font font = new Font("SansSerif", Font.PLAIN, 10);
-	    g.setFont(font);
-	    g.drawString(label,x0 - 10,y0);
-	}		
-		
-	g.setColor(color2);
-	g.fillOval(x0 - 1, y0 - v_ - dy - 1, 3, 3);
-
+		g.setColor(color);
+		g.drawLine(x0 - dx, y0 - size - dy, x0 + dx, y0 - size - dy);
+		g.drawLine(x0 - dx, y0 - dy, x0 + dx, y0 - dy);
+		g.drawLine(x0, y0 - dy, x0, y0 - size - dy);
+			
+		if (label!=null) {
+			Font font = new Font("SansSerif", Font.PLAIN, 10);
+			g.setFont(font);
+			g.drawString(label,x0 - 10,y0);
+		}		
+			
+		g.setColor(color2);
+		g.fillOval(x0 - 1, y0 - v_ - dy - 1, 3, 3);
     }
 }

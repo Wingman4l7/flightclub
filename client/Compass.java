@@ -12,9 +12,8 @@ package flightclub.client;
 import flightclub.framework3d.*;
 import java.awt.*;
 import java.util.*;
-/**
-   This class implements a compass.
-*/
+
+/** This class implements a compass. */
 class Compass {
     ModelViewer app;
     int[] hxs = {0, 2, -2};	//head of arrow
@@ -41,84 +40,78 @@ class Compass {
     static final int dy = 10; //pixel space for label at bottom
 	
     public Compass(ModelViewer theApp, int inSize, int inX0, int inY0) { 
-	app  = theApp; 
-	r = inSize/2;
-	x0 = inX0;
-	y0 = inY0;
-	init();
+		app  = theApp; 
+		r = inSize/2;
+		x0 = inX0;
+		y0 = inY0;
+		init();
     }
 	
     public Compass(ModelViewer theApp) {this(theApp, SIZE_DEFAULT, 30, 42);}
 	
     void init() {
-	/*
-	  scale arrow head and tail to size
-	  also flip y coord (screen +y points down) 
-	*/
-	float s = (float) (r - 2)/5;
-		
-	for (int i = 0; i < H_NUM; i++) {
-	    hxs[i] = (int) (hxs[i] * s);
-	    hys[i] = (int) (hys[i] * -s);
-	}
-		
-	for (int i = 0; i < T_NUM; i++) {
-	    txs[i] = (int) (txs[i] * s);
-	    tys[i] = (int) (tys[i] * -s);
-	}
-	updateArrow();
+		//  scale arrow head and tail to size
+		//  also flip y coord (screen +y points down) 
+		float s = (float) (r - 2)/5;
+			
+		for (int i = 0; i < H_NUM; i++) {
+			hxs[i] = (int) (hxs[i] * s);
+			hys[i] = (int) (hys[i] * -s);
+		}
+			
+		for (int i = 0; i < T_NUM; i++) {
+			txs[i] = (int) (txs[i] * s);
+			tys[i] = (int) (tys[i] * -s);
+		}
+		updateArrow();
     }
 	
     void setArrow(float x, float y) {
-	/*
-	  +y is north
-	  +x is east
-	*/
-	vx = x;
-	vy = y;
-		
-	//normalize
-	float d = (float) Math.sqrt(x * x + y * y);
-	vx = vx/d;
-	vy = vy/d;
-		
-	//calc arrow points
-	updateArrow();
+		// +y is north
+		// +x is east
+		vx = x;
+		vy = y;
+			
+		//normalize
+		float d = (float) Math.sqrt(x * x + y * y);
+		vx = vx/d;
+		vy = vy/d;
+			
+		//calc arrow points
+		updateArrow();
     }
 	
     public void draw (Graphics g) {
+		g.setColor(color);
+		g.drawLine(txs_[0], tys_[0],txs_[1], tys_[1]);
+			
+		Font font = new Font("SansSerif", Font.PLAIN, 10);
+		g.setFont(font);
+		g.setColor(color);
+		g.drawString("N",x0 - 3,y0 - r * 2 - dy); 
+		g.drawString("S",x0 - 3,y0);
 
-	g.setColor(color);
-	g.drawLine(txs_[0], tys_[0],txs_[1], tys_[1]);
-		
-	Font font = new Font("SansSerif", Font.PLAIN, 10);
-	g.setFont(font);
-	g.setColor(color);
-	g.drawString("N",x0 - 3,y0 - r * 2 - dy); 
-	g.drawString("S",x0 - 3,y0);
-
-	g.setColor(color2);
-	g.fillPolygon(hxs_,hys_,hxs_.length);
-		
+		g.setColor(color2);
+		g.fillPolygon(hxs_,hys_,hxs_.length);
     }
 	
     void updateArrow() {
-	//rotate
-	m[0][0] = vy;
-	m[0][1] = - vx;
-	m[1][0] = - m[0][1];
-	m[1][1] = m[0][0];
-		
-	//transform
-	for (int i = 0; i < H_NUM; i++) {
-	    hxs_[i] = (int) (m[0][0] * hxs[i] + m[0][1] * hys[i] + x0);	
-	    hys_[i] = (int) (m[1][0] * hxs[i] + m[1][1] * hys[i] + y0 - dy - r);	
-	}	
+		//rotate
+		m[0][0] = vy;
+		m[0][1] = - vx;
+		m[1][0] = - m[0][1];
+		m[1][1] = m[0][0];
+			
+		//transform
+		for (int i = 0; i < H_NUM; i++) {
+			hxs_[i] = (int) (m[0][0] * hxs[i] + m[0][1] * hys[i] + x0);	
+			hys_[i] = (int) (m[1][0] * hxs[i] + m[1][1] * hys[i] + y0 - dy - r);	
+		}	
 
-	for (int i = 0; i < T_NUM; i++) {
-	    txs_[i] = (int) (m[0][0] * txs[i] + m[0][1] * tys[i] + x0);	
-	    tys_[i] = (int) (m[1][0] * txs[i] + m[1][1] * tys[i] + y0 - dy - r);	
-	}	
+		for (int i = 0; i < T_NUM; i++) {
+			txs_[i] = (int) (m[0][0] * txs[i] + m[0][1] * tys[i] + x0);	
+			tys_[i] = (int) (m[1][0] * txs[i] + m[1][1] * tys[i] + y0 - dy - r);	
+		}	
     }
 	
 }
