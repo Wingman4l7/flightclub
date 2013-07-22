@@ -10,7 +10,7 @@ Command-line arguments from `startup/XCFrame.java`:
 			
 `XCFrame [task] [pilot_type] [host:port] [pgs hgs sps bls]`
 
-All the parameteres are optional. If none are passed in the game loads defaults as follows: 
+All the parameters are optional. If none are passed in the game loads defaults as follows: 
  - `task` = default
  - `pilot_type` = 1 (hg)
  - `host:port` = null *(ie. single player mode)*

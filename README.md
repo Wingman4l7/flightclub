@@ -64,7 +64,7 @@ The `XCFrame` class in `/startup/` implements Flight Club as an application.  It
 
 <!--- balloon glider type does not have a command-line parameter yet-->
 
-All the parameteres are optional. If none are passed in the game loads defaults as follows: 
+All the parameters are optional. If none are passed in the game loads defaults as follows: 
  - `task` = default
  - `pilot_type` = 1 (hg)
  - `host:port` = null *(ie. single player mode)*
