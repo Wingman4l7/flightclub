@@ -43,9 +43,7 @@ public class GliderManager implements ClockObserver {
 
     static GliderType[] types = new GliderType[4]; // array of glider types (pg, hg, sp, bl)
 
-    /** 
-		Loads the glider types (reads polar data etc from a text file). 
-	*/
+    /** Loads the glider types (reads polar data etc from a text file). */
     private void initTypes() {
 		try {
 			types[0] = new GliderType(xcModelViewer, "paraglider", 0);
@@ -73,9 +71,7 @@ public class GliderManager implements ClockObserver {
 		pilotType_ = pilotType;
     }
 
-    /**
-       Creates the AI gliders. Only used in single player mode.
-    */
+    /** Creates the AI gliders. Only used in single player mode. */
     protected void createAIs(int x, int y, int z) {
 		int[] nums = new int[] {x, y, z};
 		gliderAIs = new GliderAI[nums[0] + nums[1] + nums[2]];
@@ -88,9 +84,7 @@ public class GliderManager implements ClockObserver {
 		}
     }
 
-    /**
-       Take off - puts gliders near start point and heading towards next turn point.
-    */
+    /** Take off - puts gliders near start point and heading towards next turn point.  */
     void launchUser() { 
 		gliderUser.takeOff(); 
 		pNode_ = 0; 
@@ -104,8 +98,8 @@ public class GliderManager implements ClockObserver {
     }
 
     /**
-       Sets the vertical air movement for a glider. We search the
-       loaded nodes for lift sources (rather than searching the entire model.) 
+       Sets the vertical air movement for a glider. We search the loaded
+       nodes for lift sources (rather than searching the entire model.) 
      */
     private void setLift(Glider glider, Node[] nodes) {
 		if (glider == null) return;
@@ -151,9 +145,7 @@ public class GliderManager implements ClockObserver {
 		}
     }
 
-    /** 
-		Returns either user or demo glider. 
-	*/
+    /** Returns either user or demo glider. */
     Glider theGlider() {
 		if (xcModelViewer.xcModel.mode == XCModel.DEMO) {
 			return gaggleGlider();
@@ -244,9 +236,7 @@ public class GliderManager implements ClockObserver {
     }
 
     int[] netType = new int[MAX_USERS];
-    /**
-       Allows net users to change thier wing type.
-    */
+    /** Allows net users to change their wing type.  */
     void changeNetType(int index, int pilotType) {
 		if (gliderNets[index] != null) {
 			if (pilotType == netType[index]) {
@@ -270,9 +260,7 @@ public class GliderManager implements ClockObserver {
 		gliderNets[index].hitTheSpuds();
     }
 
-    /**
-       Sets value of myID to value assigned by the server for user's glider.
-    */
+    /** Sets value of myID to value assigned by the server for user's glider. */
     void setMyID(int index){
 		gliderNets[index] = null;
 		gliderUser.myID = index;
@@ -280,9 +268,7 @@ public class GliderManager implements ClockObserver {
 		gliderUser.takeOff(false);
     }
 
-	/**
-	  Change position of User at index
-	*/
+	/** Change position of User at index */
     void changeUser(int index, String line) { 
 		if (gliderNets[index].landed) {
 			gliderNets[index].takeOff();
@@ -318,9 +304,7 @@ public class GliderManager implements ClockObserver {
 		}
     }
 
-    /**
-       Deletes a connected user when user has become disconnected.
-    */
+    /** Deletes a connected user when user has become disconnected. */
     void removeUser(int index) {
 		if (index >= 0 && gliderNets[index]!=null) {
 			gliderNets[index].destroyMe();
