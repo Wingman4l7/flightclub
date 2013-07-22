@@ -72,9 +72,7 @@ public class XCModelViewer extends ModelViewer {
 		}
     }
 
-    /** 
-		Flag - connect to game server only if a host and port have been specified. 
-	*/
+    /** Flag - connect to game server only if a host and port have been specified.  */
     private void setNetFlag() {
 		netFlag = (modelEnv.getHostPort() != null);
     }

@@ -180,16 +180,12 @@ public class ModelViewer extends Panel implements ClockObserver, ModelViewerThin
 		cameraMan.setSubject((CameraSubject) subjects.elementAt(subjectIndex), true);
     }
 
-    /** 
-		Adds a camera subject to the list of subjects. 
-	*/
+    /** Adds a camera subject to the list of subjects. */
     public void addSubject(CameraSubject subj) {
 		subjects.addElement(subj);
     }
 
-    /** 
-		Toggles pause 
-	*/
+    /** Toggles pause */
     private void pause() {
 		this.clock.paused = ! this.clock.paused;
     }
