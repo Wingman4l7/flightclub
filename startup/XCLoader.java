@@ -9,18 +9,16 @@
 */
 package flightclub.startup;
 import java.lang.Thread;
-/**
-   A stub for XCModelViewer. Allows applet to provide feedback while
-   classes are being loaded.
-*/
+
+/** A stub for XCModelViewer. Allows applet to provide feedback while classes are being loaded. */
 public class XCLoader extends Thread {
     private XCApplet applet;
 
     public XCLoader(XCApplet applet) {
-	this.applet = applet;
+		this.applet = applet;
     }
 
     public void run() {
-	applet.loadFat();
+		applet.loadFat();
     }
 }
