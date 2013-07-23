@@ -20,7 +20,7 @@ import java.util.*;
 
    <p>***TODO***Filter out extra keyRelease/keyPress events generated
    when holding down a key for a few seconds. This AutoKeyRepeat bug
-   happens on Linux (and Windows ?).  
+   happens on Linux (and Windows?).
 */
 public class EventManager {
 
@@ -33,71 +33,61 @@ public class EventManager {
 	objs = new Vector();
     }
 	
-    /**
-     Adds an object to the list of objects to be notified when an
-      event happens 
-    */
+    /** Adds an object to the list of objects to be notified when an event happens */
     public void addNotification(Object o) {
-	objs.addElement(o);
+		objs.addElement(o);
     }
 	
     public void removeNotification(Object o) {
-	objs.removeElement(o);
+		objs.removeElement(o);
     }
 	
-    /**
-       Adds an event to the queue for handling later
-    */
+    /** Adds an event to the queue for handling later */
     public boolean handleEvent (KeyEvent e) {
-	
-	if (queueNum < MAX_Q) {
-	    queue[queueNum] = e;
-	    queueNum ++;
-	    return true;
-	} else {
-	    return false;
-	}
+		if (queueNum < MAX_Q) {
+			queue[queueNum] = e;
+			queueNum ++;
+			return true;
+		} else {
+			return false;
+		}
     }
 	
-    /**
-       Dispatch the event at the head of the queue.
-    */
+    /** Dispatch the event at the head of the queue. */
     public void tick() {
-	
-	KeyEvent e = popQueue();
-	if (e == null) return;
-		
-	for (int i = 0; i < objs.size(); i++) {
-	    EventInterface ei = (EventInterface) objs.elementAt(i);
-	    callEventHelper(ei, e);
-	}
+		KeyEvent e = popQueue();
+		if (e == null) return;
+			
+		for (int i = 0; i < objs.size(); i++) {
+			EventInterface ei = (EventInterface) objs.elementAt(i);
+			callEventHelper(ei, e);
+		}
     }
 	
     private void callEventHelper(EventInterface ei, KeyEvent e) {
-	switch (e.getID()) {
-	case KeyEvent.KEY_RELEASED:
-	    ei.keyReleased(e); break;
-	case KeyEvent.KEY_PRESSED:
-	    ei.keyPressed(e); break;
-	default:
-	}
-	return;
+		switch (e.getID()) {
+			case KeyEvent.KEY_RELEASED:
+				ei.keyReleased(e); break;
+			case KeyEvent.KEY_PRESSED:
+				ei.keyPressed(e); break;
+			default:
+		}
+		return;
     }
 	
     private KeyEvent popQueue() {
-	//return event at head of the queue or null if 
-	//queue is empty
-	if (queueNum ==0) return null;
-		
-	KeyEvent e = queue[0];
+		//return event at head of the queue or null if queue is empty
+		if (queueNum ==0) return null;
+			
+		KeyEvent e = queue[0];
 
-	//shuffle up one
-	for (int i = 0; i < queueNum - 1; i ++) {
-	    queue[i] = queue[i+1];
-	}
-		
-	queue[queueNum - 1] = null;
-	queueNum --;
-	return e;
+		//shuffle up one
+		for (int i = 0; i < queueNum - 1; i ++) {
+			queue[i] = queue[i+1];
+		}
+			
+		queue[queueNum - 1] = null;
+		queueNum --;
+		return e;
     }
 }

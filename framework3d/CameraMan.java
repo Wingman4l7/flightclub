@@ -90,7 +90,7 @@ public class CameraMan {
     }
 
     /**
-       Calcs how much light falls on a surface with this normal.
+       Calculates how much light falls on a surface with this normal.
 
        <p>Return 0 if no light falls on surface and 1 if surface faces
        directly into the light. Usually we are somewhere in between.
@@ -104,9 +104,8 @@ public class CameraMan {
     }
 
     /**
-      Update camera position, only if we are mid cut
-      or the subject is moving.
-
+      Update camera position, only if we are mid cut or the subject is moving.
+      
       @see ModelViewer#tick(float, float)
     */
     public void tick () {
@@ -139,8 +138,8 @@ public class CameraMan {
     }
 
     /**
-     * Sets the camera subject. The camera will gradually move to
-     * its new position over CUT_LEN ticks.
+     * Sets the camera subject. The camera will gradually move 
+     * to its new position over CUT_LEN ticks.
      * 
      * @param cameraSubject the subject to film.
      * @param track if true then track the subject as it moves.
@@ -163,7 +162,7 @@ public class CameraMan {
 		Tools3d.subtract(focusGoto, focus, dfocus);
 
 		/*
-		  The eye accelerates from 0 upto velocity
+		  The eye accelerates from 0 up to velocity
 		  deye over cutRamp steps, tracks at deye then
 		  slows to zero over cutRamp steps. Similarly 
 		  for focus.
@@ -192,9 +191,7 @@ public class CameraMan {
 		focusGoto = cameraSubject.getFocus();
     }
 
-    /**
-      Iterate the cut. 
-    */
+    /** Iterate the cut. */
     private void cutStep() {
 		float[] deye_ = {deye[0], deye[1], deye[2]};
 		float[] dfocus_ = {dfocus[0], dfocus[1], dfocus[2]};
@@ -231,10 +228,7 @@ public class CameraMan {
     public float[] getFocus() { return new float[] {focus[0], focus[1], focus[2]}; }
     public float[] getEye() { return new float[] {eye[0], eye[1], eye[2]}; }
     
-    /**
-      Rotates the eye about the focus by dtheta (L/R) 
-      and moves the eye up or down by dz.
-    */
+    /** Rotates the eye about the focus by dtheta (L/R) and moves the eye up or down by dz. */
     public void rotate(float dtheta,float dz) {
 		//Transform ray.
 		//TODO: optimize - dtheta only takes one of two vales - see ModelCanvas
@@ -254,9 +248,7 @@ public class CameraMan {
 		setMatrix();
     }
 
-    /**
-      Move focus whilst maintaining the position of the eye relative to the focus 
-    */
+    /** Move focus whilst maintaining the position of the eye relative to the focus. */
     private void moveFocus(float[] f) {
 		Tools3d.subtract(eye,focus,ray);
 		focus[0] = f[0];
@@ -304,7 +296,6 @@ public class CameraMan {
        origin.
     */
     Color foggyColor(float x_, Color c) {
-
 		if (x_ >= 0) return c;
 		x_ *= -1;
 		
@@ -328,19 +319,13 @@ public class CameraMan {
 		return new Color(r_,g_,b_);
     }
 
-    /** 
-		Move eye closer to the focus. 
-	*/
+    /** Move eye closer to the focus. */
     public void pullIn() { pull(-1); }
 
-    /** 
-		Move eye further away from the focus. 
-	*/
+    /** Move eye further away from the focus. */
     public void pullOut() { pull(+1); }
 
-    /** 
-		A private helper fn used by pullIn and pullOut. 
-	*/
+    /** A private helper function used by pullIn and pullOut. */
     private void pull(int dir) {
 		distance *= (1 + dir * ZOOM_STEP);
 
@@ -356,9 +341,7 @@ public class CameraMan {
 		}
     }
 
-    /** 
-		Returns a string that may be handy for debugging.
-	*/
+    /** Returns a string that may be handy for debugging. */
     public String toString() {
 		return "Camera: \n\t distance: " + Tools3d.round(distance) + 
 							"\n\t eye: " + Tools3d.toString(eye) + 

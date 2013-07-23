@@ -10,7 +10,9 @@
 package flightclub.framework3d;
 
 /**
-  This class implements the most basic camera subject. We have two points; one defines the focus position and a second defines the eye position.
+  This class implements the most basic camera subject. 
+  We have two points; one defines the focus position 
+  and a second defines the eye position.
 
   @see CameraMan#setSubject
 */
@@ -18,8 +20,8 @@ public class CameraSubjectSimple implements CameraSubject {
     private float[] eye, focus;
     
     public CameraSubjectSimple(float[] eye,float[] focus) {
-	this.eye = new float[] {eye[0], eye[1], eye[2]};
-	this.focus = new float[] {focus[0], focus[1], focus[2]};
+		this.eye = new float[] {eye[0], eye[1], eye[2]};
+		this.focus = new float[] {focus[0], focus[1], focus[2]};
     }
 
     public float[] getEye() { return new float[] { eye[0], eye[1], eye[2] }; }

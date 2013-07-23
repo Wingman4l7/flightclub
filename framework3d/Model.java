@@ -10,6 +10,7 @@
 package flightclub.framework3d;
 
 import java.awt.event.*;
+
 /**
    This class is defines a simple model. We have a unit cube at the
    origin. This model does not change over time and does not respond
@@ -20,14 +21,14 @@ public class Model implements EventInterface, ClockObserver {
     protected ModelViewer modelViewer;
 
     public Model(ModelViewer modelViewer) { 
-	this.modelViewer = modelViewer;
-	modelViewer.eventManager.addNotification(this);
-	modelViewer.clock.addObserver(this);
+		this.modelViewer = modelViewer;
+		modelViewer.eventManager.addNotification(this);
+		modelViewer.clock.addObserver(this);
     }
 
     /** Overrride this */
     protected void makeModel() {
-	Obj3d.makeCube(modelViewer);
+		Obj3d.makeCube(modelViewer);
     }
 
     public void tick(float t, float dt) {;}

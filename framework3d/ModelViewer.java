@@ -69,7 +69,7 @@ public class ModelViewer extends Panel implements ClockObserver, ModelViewerThin
     /**
        Creates the clock. Pass in the current model time; this will be zero
        unless we are connected to a game server. Or, perhaps we generate
-       a random time in the former case ?
+       a random time in the former case?
     */
     protected void createClock() {
 		clock = new Clock(0);
@@ -78,7 +78,7 @@ public class ModelViewer extends Panel implements ClockObserver, ModelViewerThin
     }
 	
     /**
-       This looks a bit fishy ! But trust me. Dispatching tick events
+       This looks a bit fishy! But trust me. Dispatching tick events
        from here to the event manager, model canvas and cameraman gives
        'bullet time' when the clock is paused.
     */
@@ -90,7 +90,8 @@ public class ModelViewer extends Panel implements ClockObserver, ModelViewerThin
 		modelCanvas.repaint();
 
 		// uncomment next line to see frame rate
-		//modelCanvas.setText("F: " + clock.getFrameRate()); //this call has an error; requires a second argument -- "int line"
+		//modelCanvas.setText("F: " + clock.getFrameRate()); 
+		//ERROR: requires a second argument -- "int line"
     }
 
     protected void createModelCanvas() {
@@ -113,8 +114,8 @@ public class ModelViewer extends Panel implements ClockObserver, ModelViewerThin
     }
 
     /**
-       Creates a unit cube at the origin. Override this method to
-       create your own model. Obviously !
+       Creates a unit cube at the origin. Override this method 
+	   to create your own model. Obviously !
     */
     protected void createModel() {
 		model = new Model(this);
@@ -171,8 +172,8 @@ public class ModelViewer extends Panel implements ClockObserver, ModelViewerThin
     private int subjectIndex = -1;
     private Vector subjects = new Vector();
     /**
-       A list of possible camera subjects that the user may cut
-       between by pressing the 'toggle subject' button.  
+       A list of possible camera subjects that the user may
+       cut between by pressing the 'toggle subject' button.  
     */
     private void toggleSubject() {
 		if (subjects.size() == 0) return; 
