@@ -81,7 +81,7 @@ For game controls, objectives, and tips, view the [instructions](https://github.
 
 ## License ##
 
-Dan Burton [licensed this source code] [license_ref] under version 2 of the [GNU General Public License] [GNU_GPL].  Although I might personally choose to release source code under a diferent license (like [Creative Commons](http://creativecommons.org/licenses/)), let's say that all this is under the GPL too, for simplicity's sake.
+Dan Burton [licensed this source code][license_ref] under version 2 of the [GNU General Public License][GNU_GPL].  Although I might personally choose to release source code under a diferent license (like [Creative Commons](http://creativecommons.org/licenses/)), let's say that all this is under the GPL too, for simplicity's sake.
 
 [license_ref]: http://web.archive.org/web/20050620075430/http://www.danb.dircon.co.uk/hg/hg.htm#dev
 [GNU_GPL]: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
@@ -90,9 +90,7 @@ Dan Burton [licensed this source code] [license_ref] under version 2 of the [GNU
 
 If you appreciate my continued support & development of this game, you can send Bitcoin donations to: `1F7kfMNUNQy8e52RHnQAWYXeaYfzFqHJAZ`
 
-Alternatively, you can use [Gittip](https://www.gittip.com/Wingman4l7/).
-
-As the original author [Dan Burton said] [donate_quotes]:
+As the original author [Dan Burton said][donate_quotes]:
 
 >"Earn yourself some "kharma in the dharma" - make a donation to support Flight Club. [...] Remember, *open-source* means free in the sense of free speech not free beer."
 
